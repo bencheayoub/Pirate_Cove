@@ -6,18 +6,25 @@ public class GameStateManager : MonoBehaviour
 {
     public static event Action OnGameOver;
 
+    private bool isGameOver;
+
     private void OnEnable()
     {
-        HealthSystem.OnPlayerDied += HandlePlayerDied;
+        HealthSystem.OnPlayerDied += EndGame;
+        TimerSystem.OnTimeUp += EndGame;
     }
 
     private void OnDisable()
     {
-        HealthSystem.OnPlayerDied -= HandlePlayerDied;
+        HealthSystem.OnPlayerDied -= EndGame;
+        TimerSystem.OnTimeUp -= EndGame;
     }
 
-    private void HandlePlayerDied()
+    private void EndGame()
     {
+        if (isGameOver) return;
+
+        isGameOver = true;
         Time.timeScale = 0f;
         OnGameOver?.Invoke();
     }
