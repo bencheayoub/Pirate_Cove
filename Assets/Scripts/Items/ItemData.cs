@@ -7,4 +7,5 @@ public class ItemData : ScriptableObject
     public int damage = 0;
     public bool isBomb = false;
     public Color color = Color.white;
+    public Sprite sprite;
 }

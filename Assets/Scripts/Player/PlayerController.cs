@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         // Work out the screen edges so the basket can't leave the screen
-        float halfBasketWidth = transform.localScale.x / 2f;
+        float halfBasketWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
         float halfScreenWidth = Camera.main.orthographicSize * Camera.main.aspect;
 
         minX = -halfScreenWidth + halfBasketWidth;

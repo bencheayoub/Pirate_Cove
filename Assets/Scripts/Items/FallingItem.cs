@@ -10,14 +10,15 @@ public class FallingItem : MonoBehaviour
     private ItemData data;
     private float bottomY;
     private SpriteRenderer myRenderer;
-    private SpriteRenderer playerRenderer;
+    private Collider2D catchZone;
 
     public void Initialize(ItemData itemData, float speed)
     {
         data = itemData;
         fallSpeed = speed;
         myRenderer = GetComponent<SpriteRenderer>();
-        myRenderer.color = data.color;
+        myRenderer.sprite = data.sprite;
+        myRenderer.color = Color.white;
     }
 
     private void Start()
@@ -26,18 +27,21 @@ public class FallingItem : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
-            playerRenderer = player.GetComponent<SpriteRenderer>();
-        else
-            Debug.LogError("No object with the Player tag found!");
+        {
+            Transform zone = player.transform.Find("CatchZone");
+            if (zone != null) catchZone = zone.GetComponent<Collider2D>();
+        }
+
+        if (catchZone == null)
+            Debug.LogError("CatchZone not found under Player!");
     }
 
     private void Update()
     {
         transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
 
-        if (playerRenderer != null && myRenderer.bounds.Intersects(playerRenderer.bounds))
+        if (catchZone != null && myRenderer.bounds.Intersects(catchZone.bounds))
         {
-            Debug.Log("Caught: " + data.name);
             OnItemCaught?.Invoke(data);
             Destroy(gameObject);
             return;

@@ -16,3 +16,4 @@ MonoBehaviour:
   damage: 0
   isBomb: 0
   color: {r: 0.024697335, g: 0.5471698, b: 0, a: 1}
+  sprite: {fileID: 7675826601332790545, guid: 7b740f20467e1c4a1b30762be90c1e79, type: 3}
