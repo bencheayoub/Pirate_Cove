@@ -1,4 +1,4 @@
-# Pirate Cove: The Catcher
+# Pirate Cove
 
 Unity mini-game challenge report. Author: b.atomic
 
