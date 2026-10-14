@@ -20,6 +20,14 @@ public class GameStateManager : MonoBehaviour
         TimerSystem.OnTimeUp -= EndGame;
     }
 
+    private void Update()
+    {
+        if (!isGameOver) return;
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            Restart();
+    }
+
     private void EndGame()
     {
         if (isGameOver) return;

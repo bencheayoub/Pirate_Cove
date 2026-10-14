@@ -1,12 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
+    [FormerlySerializedAs("highScoresText")]
+    [SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private GameObject gameOverPanel;
+
+    private int lastScore;
 
     private void Start()
     {
@@ -19,6 +24,7 @@ public class UIManager : MonoBehaviour
         HealthSystem.OnHealthChanged += UpdateHealth;
         TimerSystem.OnTimeChanged += UpdateTime;
         GameStateManager.OnGameOver += ShowGameOver;
+        HighScoreSystem.OnHighScoresUpdated += ShowFinalScore;
     }
 
     private void OnDisable()
@@ -27,10 +33,12 @@ public class UIManager : MonoBehaviour
         HealthSystem.OnHealthChanged -= UpdateHealth;
         TimerSystem.OnTimeChanged -= UpdateTime;
         GameStateManager.OnGameOver -= ShowGameOver;
+        HighScoreSystem.OnHighScoresUpdated -= ShowFinalScore;
     }
 
     private void UpdateScore(int score)
     {
+        lastScore = score;
         scoreText.text = "Score: " + score;
     }
 
@@ -48,5 +56,13 @@ public class UIManager : MonoBehaviour
     private void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+    }
+
+    private void ShowFinalScore(int[] scores)
+    {
+        finalScoreText.text =
+            "Your score: " + lastScore + "\n" +
+            "Best: " + scores[0] + "\n\n" +
+            "Press ENTER to restart";
     }
 }

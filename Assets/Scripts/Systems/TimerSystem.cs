@@ -8,7 +8,7 @@ public class TimerSystem : MonoBehaviour
 
     [SerializeField] private float startTime = 90f;
     [SerializeField] private float catchBonus = 2f;
-    [SerializeField] private float missPenalty = 1f;
+    [SerializeField] private float missPenalty = 3f;
 
     private float timeLeft;
     private bool finished;
