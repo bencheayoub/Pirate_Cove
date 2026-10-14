@@ -27,11 +27,15 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        currentInterval = startInterval;
-        currentSpeed = startFallSpeed;
         spawnY = Camera.main.orthographicSize + 1f;
         halfWidth = Camera.main.orthographicSize * Camera.main.aspect - 0.5f;
     }
+
+    private void Awake()
+{
+    currentInterval = startInterval;
+    currentSpeed = startFallSpeed;
+}
 
     private void Update()
     {
