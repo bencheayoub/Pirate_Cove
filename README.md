@@ -60,3 +60,6 @@ Every subscription (`+=` in `OnEnable`) has a matching unsubscription (`-=` in `
 - **Catch zone.** The pirate sprite is tall, so catches are checked against a small invisible zone on the chest opening, not the whole sprite.
 - **Difficulty by events.** A timer raises the level and the Spawner reacts by shortening the spawn interval and increasing the fall speed, up to a cap.
 - **Persistent scores.** Scores are kept with PlayerPrefs, so they survive closing the game, and the menu reads them through a static method.
+
+## Note:
+Play the game in QHD (2560x1440) in unity for a better experience.
